@@ -1,0 +1,18 @@
+apiVersion: score.dev/v1b1
+
+metadata:
+  name: web-app
+
+# Define the ports that this service exposes
+service:
+  ports:
+    www:
+      port: 8080 # The port that the service will be exposed on
+      targetPort: 8080 # The port that the container will be listening on
+
+# Define the containers that make up this service
+containers:
+  demo:
+    image: . # Set by pipeline
+    variables:
+      MESSAGE: "Hello deployer!"
