@@ -1,0 +1,25 @@
+ARG CONTAINER_REGISTRY=mcr.microsoft.com
+FROM ${CONTAINER_REGISTRY}/dotnet/sdk:8.0-alpine
+WORKDIR /src
+
+RUN mkdir -p $HOME/.nuget/
+
+ARG CREDENTIALPROVIDER_URL="https://github.com/Microsoft/artifacts-credprovider/releases/latest/download/Microsoft.NuGet.CredentialProvider.tar.gz"
+RUN curl -H "Accept: application/octet-stream" \
+     -s \
+     -S \
+     -L \
+     "${CREDENTIALPROVIDER_URL}" | tar xz -C "$HOME/.nuget/" "plugins/netcore"
+
+COPY ./src/DBMigration ./DBMigration
+COPY ./NuGet.Config .
+
+WORKDIR /src/DBMigration
+
+ARG FEED_ACCESSTOKEN
+
+ARG DB_CONNECTION_STRING
+ARG BUILD_NUMBER
+RUN echo ${BUILD_NUMBER}
+RUN export VSS_NUGET_EXTERNAL_FEED_ENDPOINTS="{\"endpointCredentials\": [{\"endpoint\":\"https://pkgs.dev.azure.com/vialto/myMobility-CoreApp/_packaging/ci-1/nuget/v3/index.json\", \"username\":\"docker\", \"password\":\"${FEED_ACCESSTOKEN}\"}]}" \
+  && dotnet run "${DB_CONNECTION_STRING}"

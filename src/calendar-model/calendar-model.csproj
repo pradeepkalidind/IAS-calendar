@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <ProjectGuid>{B29598C8-49C7-4F89-8BCA-139C2B3FE8E2}</ProjectGuid>
+    <RootNamespace>Calendar</RootNamespace>
+    <AssemblyName>Calendar.Model</AssemblyName>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyTitle>calendar-model</AssemblyTitle>
+    <Company>Microsoft</Company>
+    <Product>calendar-model</Product>
+    <Copyright>Copyright © Microsoft 2011</Copyright>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+</Project>

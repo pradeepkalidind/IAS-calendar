@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="ec2-175-41-213-134.ap-northeast-1.compute.amazonaws.com" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="Default Web Site/calendar-service" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="True" msdeploySkipExtraFilesOnServer="False" msdeployMarkAsApp="True" profileName="Profile1" publishMethod="MSDeploy" replaceMatchingFiles="True" userName="Administrator" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA3QIHC9phl0G9pDFe7AyGcwAAAAACAAAAAAAQZgAAAAEAACAAAAAbrgkAW3nWoAk3eW4IaNo6qh+lNPgI0qpUrAhNcetWIQAAAAAOgAAAAAIAACAAAACmD5yaRz6C4udDdxcy9ySfFLeI0GdfRufUFp0pwTpySyAAAAAp62PpgvOpImevtqtUbYDFJW/vpzwQa7zJDwp7IRppXEAAAADAVliA20tJozXOiRjY3LL8S8D3nzqy4JzjsEjySjqaVoBlAFDOW+VsF7ypQi/wz/fI6H2EnAqyThxrTOB2Bri8" SelectedForPublish="True" />
+</publishData>

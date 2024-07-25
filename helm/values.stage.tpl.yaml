@@ -1,0 +1,154 @@
+deployment:
+  containers:
+    - name: calendar-service
+      repo: calendar-service/calendar-service
+      probes:
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: http
+      resources:
+        limits:
+          cpu: 1
+          memory: 2048Mi
+        requests:
+          cpu: 100m
+          memory: 250Mi
+      env:
+        - name: "ASPNETCORE_ENVIRONMENT"
+          value: "Production"
+        - name: "ASPNETCORE_URLS"
+          value: "http://+:8080"
+        - name: "ApplicationInsightsConnectionString"
+          valueFrom:
+            secretKeyRef:
+              name: calendar-service-infra-secret
+              key: ApplicationInsightsConnectionString
+        - name: "DatabaseAccess-CalendarService-PrimaryPassword"
+          valueFrom:
+            secretKeyRef:
+              name: calendar-service-infra-secret
+              key: DatabaseAccess-CalendarService-PrimaryPassword
+        - name: "DatabaseAccess-CalendarService-PrimaryUsername"
+          valueFrom:
+            secretKeyRef:
+              name: calendar-service-infra-secret
+              key: DatabaseAccess-CalendarService-PrimaryUsername
+        - name: "sqlServerUrl"
+          valueFrom:
+            secretKeyRef:
+              name: calendar-service-infra-secret
+              key: sqlServerUrl
+        - name: "ApiManagementHostUrl"
+          value: "https://api-stage.vialto.com/calendarific-stg/"
+        - name: "CalendarificApiKey"
+          valueFrom:
+            secretKeyRef:
+              name: calendar-service-app-secret
+              key: CalendarService-CalendarificApiKey
+        - name: "CalendarificApimSubscriptionKey"
+          valueFrom:
+            secretKeyRef:
+              name: calendar-service-app-secret
+              key: CalendarService-CalendarificApimSubscriptionKey
+        - name: "DBConnectionString"
+          value: "Data Source=$(sqlServerUrl);Initial Catalog=Calendar-stage;User ID=$(DatabaseAccess-CalendarService-PrimaryUsername);Password=$(DatabaseAccess-CalendarService-PrimaryPassword);Connection Timeout=60;"
+        - name: "EnableTrackSqlFullQueryTextInApplicationInsights"
+          value: "true"
+        - name: "HolidaysFilterType"
+          value: "national"
+
+service:
+  type: ClusterIP
+  targetPort: 8080
+  port: 80
+  healthcheck:
+    enabled: true
+    url: /health
+
+istio:
+  hosts:
+    - calsvc-{{ .Values.env }}.pwcias.local
+  gateways:
+    - {{ .Values.env }}/{{ .Values.common.ingressGatewayName }}
+  rules:
+    http:
+        - match:
+          - uri:
+              prefix: "/"
+          route:
+            - destination:
+                host: calendar-service.{{ .Values.env }}.svc.cluster.local
+                port:
+                  number: 80
+  authentication: {}
+  authorization: {}
+  filter: {}
+
+keyvault:
+  infra:
+    name: "{{ .Values.common.KeyVaultName }}"
+    secretObjects:
+      - secretName: calendar-service-infra-secret
+        type: Opaque
+        labels:
+          environment: {{ .Values.env }}
+        data:
+          - objectName: ApplicationInsightsConnectionString
+            key: ApplicationInsightsConnectionString
+          - objectName: DatabaseAccess-CalendarService-PrimaryPassword
+            key: DatabaseAccess-CalendarService-PrimaryPassword
+          - objectName: DatabaseAccess-CalendarService-PrimaryUsername
+            key: DatabaseAccess-CalendarService-PrimaryUsername
+          - objectName: sqlServerUrl
+            key: sqlServerUrl
+    objects: |
+      array:
+        - |
+          objectName: ApplicationInsightsConnectionString
+          objectType: secret
+          objectVersion: ""
+        - |
+          objectName: DatabaseAccess-CalendarService-PrimaryPassword
+          objectType: secret
+          objectVersion: ""
+        - |
+          objectName: DatabaseAccess-CalendarService-PrimaryUsername
+          objectType: secret
+          objectVersion: ""
+        - |
+          objectName: sqlServerUrl
+          objectType: secret
+          objectVersion: ""
+  app:
+    name: "{{ .Values.common.aksKeyVaultName }}"
+    secretObjects:
+      - secretName: calendar-service-app-secret
+        type: Opaque
+        labels:
+          environment: {{ .Values.env }}
+        data:
+          - objectName: CalendarService-CalendarificApiKey
+            key: CalendarService-CalendarificApiKey
+          - objectName: CalendarService-CalendarificApimSubscriptionKey
+            key: CalendarService-CalendarificApimSubscriptionKey
+    objects: |
+      array:
+        - |
+          objectName: CalendarService-CalendarificApiKey
+          objectType: secret
+          objectVersion: ""
+        - |
+          objectName: CalendarService-CalendarificApimSubscriptionKey
+          objectType: secret
+          objectVersion: ""
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80

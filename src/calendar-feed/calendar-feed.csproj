@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <ProjectGuid>{38BD73F8-6D13-4DFB-BB23-9049BF08F5EF}</ProjectGuid>
+    <RootNamespace>Calendar.Feed</RootNamespace>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AssemblyName>Calendar.Feed</AssemblyName>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <AssemblyTitle>calendar-feed</AssemblyTitle>
+    <Company>Microsoft</Company>
+    <Product>calendar-feed</Product>
+    <Copyright>Copyright © Microsoft 2011</Copyright>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentNHibernate" Version="3.1.0" />
+    <PackageReference Include="NHibernate" Version="5.3.12" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\calendar-authentication\calendar-authentication.csproj" />
+    <ProjectReference Include="..\calendar-client-schema\calendar-client-schema.csproj" />
+    <ProjectReference Include="..\calendar-general\calendar-general.csproj" />
+    <ProjectReference Include="..\calendar-model\calendar-model.csproj" />
+  </ItemGroup>
+</Project>

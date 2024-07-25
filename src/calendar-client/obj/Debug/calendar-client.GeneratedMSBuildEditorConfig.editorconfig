@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = PWC.IAS.Calendar.Client
+build_property.ProjectDir = /Users/pradeep.kalidindi/CoreApps/Repo/pradeepkalidind/IAS-calendar/src/calendar-client/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

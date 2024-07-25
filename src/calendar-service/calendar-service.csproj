@@ -1,0 +1,95 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
+    <ProductVersion />
+    <ProjectGuid>{3F2D5265-E71A-4EBD-BA1C-8F778A39878F}</ProjectGuid>
+    <RootNamespace>Calendar.Service</RootNamespace>
+    <AssemblyName>Calendar.Service</AssemblyName>
+    <TargetFramework>net8.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <UseIISExpress>false</UseIISExpress>
+    <AssemblyTitle>calendar_service</AssemblyTitle>
+    <Company>Microsoft</Company>
+    <Product>calendar_service</Product>
+    <Description>PwC Calendar Service</Description>
+    <Copyright>Copyright 2012</Copyright>
+    <Version>1.0</Version>
+    <Authors>ThoughtWorks Corp</Authors>
+    <PackageId>CalendarService</PackageId>
+    <PackageTags>pwc-resource</PackageTags>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentNHibernate" Version="3.1.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.6" />
+    <PackageReference Include="NLog" Version="5.0.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.1.0" />
+    <PackageReference Include="PwC.Configuration" Version="3.0.0-master.20240222.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="NHibernate" Version="5.3.12" />
+    <PackageReference Include="Vialto.CodeAnalyzer" Version="1.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Vialto.NHibernate.Extensions" Version="1.0.0-master.20230601.3" />
+    <PackageReference Include="Vialto.WebApi.Fundamental" Version="2.0.0-dotnet8.20240611.8" />
+    <PackageReference Include="Vialto.HealthCheck" Version="2.0.0-dotnet8.20240611.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Calendar.API.Test" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="appSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="app.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\calendar-authentication\calendar-authentication.csproj" />
+    <ProjectReference Include="..\calendar-client-schema\calendar-client-schema.csproj" />
+    <ProjectReference Include="..\calendar-feed\calendar-feed.csproj" />
+    <ProjectReference Include="..\calendar-general\calendar-general.csproj" />
+    <ProjectReference Include="..\calendar-model-compact\calendar-model-compact.csproj" />
+    <ProjectReference Include="..\calendar-model-convertor\calendar-model-convertor.csproj" />
+    <ProjectReference Include="..\calendar-model\calendar-model.csproj" />
+    <ProjectReference Include="..\calendar-persistence\calendar-persistence.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configs\authentication.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configs\feed.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Web.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="appSettings.json.user" Condition="Exists('appSettings.json.user')">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+	<ItemGroup>
+		<Content Include="..\..\.dockerignore">
+			<Link>.dockerignore</Link>
+		</Content>
+	</ItemGroup>
+</Project>

@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <ProjectGuid>{E39CE718-A070-497E-8BB7-E0141A26AD85}</ProjectGuid>
+    <RootNamespace>Calendar.Authentication</RootNamespace>
+    <AssemblyName>Calendar.Authentication</AssemblyName>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <AssemblyTitle>calendar-authentication</AssemblyTitle>
+    <Company>Microsoft</Company>
+    <Product>calendar-authentication</Product>
+    <Copyright>Copyright © Microsoft 2011</Copyright>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+</Project>

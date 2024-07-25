@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <ProjectGuid>{55DAB111-4267-4D23-8146-4246E7586266}</ProjectGuid>
+    <RootNamespace>Calendar.Migration</RootNamespace>
+    <AssemblyName>DBMigration</AssemblyName>
+    <TargetFramework>net8.0</TargetFramework>
+	<OutputType>Exe</OutputType>
+    <AssemblyTitle>DBMigration</AssemblyTitle>
+    <Company>Microsoft</Company>
+    <Product>DBMigration</Product>
+    <Description>PwC Calendar Service</Description>
+    <Copyright>Copyright 2012</Copyright>
+    <Version>1.0</Version>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <Authors>ThoughtWorks Corp</Authors>
+    <PackageId>CalendarDB</PackageId>
+    <PackageTags>pwc-resource</PackageTags>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentMigrator" Version="3.2.15" />
+    <PackageReference Include="FluentMigrator.Console" Version="3.2.15" />
+	<PackageReference Include="FluentMigrator.Runner" Version="3.2.15" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="db-config.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="migrate-calendar-db.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="restore-calendar-db.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="unblockFile.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="application_db.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="create_feed_archive_job.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="log_db.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="log_tables.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(PkgFluentMigrator_Console)\tools\net461\any\**" LinkBase="tools" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <SonarQubeSetting Include="sonar.coverage.exclusions">
+      <Value>**/*.cs</Value>
+    </SonarQubeSetting>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = Calendar.Model.Compact
+build_property.ProjectDir = /Users/pradeep.kalidindi/CoreApps/Repo/pradeepkalidind/IAS-calendar/src/calendar-model-compact/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

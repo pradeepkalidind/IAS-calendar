@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <ProjectGuid>{4A9EB552-C4A2-4CCC-A45C-DDFB1B4FF7F2}</ProjectGuid>
+    <RootNamespace>Calendar.Model.Compact</RootNamespace>
+    <AssemblyName>Calendar.Model.Compact</AssemblyName>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyTitle>calendar-model-compact</AssemblyTitle>
+    <Product>calendar-model-compact</Product>
+    <Copyright>Copyright ©  2012</Copyright>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentNHibernate" Version="3.1.0" />
+    <PackageReference Include="NHibernate" Version="5.3.12" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="6.0.0" />
+    <PackageReference Include="TableExporter" Version="2.4.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\calendar-client-schema\calendar-client-schema.csproj" />
+    <ProjectReference Include="..\calendar-persistence\calendar-persistence.csproj" />
+  </ItemGroup>
+</Project>
